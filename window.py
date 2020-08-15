@@ -108,7 +108,7 @@ def extract_window(wavform, blackman_coeff, dither, window_size, window_shift,
             wavform[:-(offset + num_samples_ - num_samples + 1):-1]
         ])
     frames = sliding_window(wavform, window_size=window_size, window_shift=window_shift).astype(np.float32)
-    log_enery = np.empty(frames.shape[0], dtype=np.float32)
+    log_enery = np.empty(frames.shape[0], dtype=frames.dtype)
     for i in range(frames.shape[0]):
         frames[i], log_enery[i] = process_window(
             window=frames[i],

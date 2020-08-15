@@ -192,7 +192,7 @@ def apply_cmvn_sliding(feat, center=False, window=600, min_window=100, norm_vars
             mean = mean1.repeat(num_frames, axis=0)
         else:
             s = np.cumsum(feat[:window], axis=0)[min_window:]
-            c = np.arange(min_window, min(window, num_frames), dtype=np.float32)[:, np.newaxis]
+            c = np.arange(min_window, min(window, num_frames), dtype=feat.dtype)[:, np.newaxis]
             mean2 = s / c
             if num_frames <= window:
                 mean = np.concatenate([
