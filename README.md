@@ -92,3 +92,7 @@ mfcc = apply_sliding_cmvn(raw_mfcc, window=300, center=True)[vad]
     frames_context: Number of frames of context on each side of central frame, in window for which energy is monitored (int, default = 0)
     proportion_threshold: Parameter controlling the proportion of frames within the window that need to have more energy than the threshold (float, default = 0.6)
     ```
+
+### Related Projects
+- [python_speech_features](https://github.com/jameslyons/python_speech_features)
+- [python_kaldi_features](https://github.com/ZitengWang/python_kaldi_features)
