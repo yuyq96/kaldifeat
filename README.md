@@ -1,6 +1,6 @@
-# kaldifeat
+# KaldiFeat
 
-Kaldifeat is a light-weight Python library for computing acoustic features based on NumPy, which generates almost the same features as those in Kaldi. It might be helpful if you want to:
+KaldiFeat is a light-weight Python library for computing acoustic features based on NumPy, which generates almost the same features as those in Kaldi. It might be helpful if you want to:
 - Test a pre-trained model on new data without writing shell commands and creating a bunch of files.
 - Run a pre-trained model in a new environment without installing Kaldi.
 
