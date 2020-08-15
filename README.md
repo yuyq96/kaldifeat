@@ -25,7 +25,7 @@ vad = compute_vad(log_energy, energy_threshold=5.5, energy_mean_scale=0.5, frame
 mfcc = apply_sliding_cmvn(raw_mfcc, window=300, center=True)[vad]
 ```
 
-### Support Function
+### Supported Functions
 
 - `kaldifeat.feature.compute_fbank_feats`
   - Compute (log) Mel filter banks (FBanks)
