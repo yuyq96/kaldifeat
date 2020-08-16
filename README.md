@@ -11,13 +11,13 @@ The following codes calculate MFCCs with the same settings in `kaldi/egs/voxcele
 ```
 import librosa
 
-from kaldifeat.feature import compute_mfcc_feats, compute_vad, apply_sliding_cmvn
+from kaldifeat import compute_mfcc_feats, compute_vad, apply_sliding_cmvn
 
 # Assume we have a wav file called example.wav whose sample rate is 16000 Hz
 data, _ = librosa.load('example.wav', 16000)
 
 # We adopt 16 bits data, thus we need to transform dtype from float to int16 for librosa
-data = (data * (1 << 15)).astype(np.int16)
+data = (data * 32768).astype(np.int16)
 
 raw_mfcc = compute_mfcc_feats(data, sample_frequency=16000, frame_length=25, frame_shift=10, low_freq=20, high_freq=-400, num_mel_bins=30, num_ceps=30, snip_edges=False)
 log_energy = raw_mfcc[:, 0]
