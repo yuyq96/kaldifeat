@@ -11,7 +11,7 @@ The following codes calculate MFCCs with the same settings in `kaldi/egs/voxcele
 ```
 import librosa
 
-from kaldifeat import compute_mfcc_feats, compute_vad, apply_sliding_cmvn
+from kaldifeat import compute_mfcc_feats, compute_vad, apply_cmvn_sliding
 
 # Assume we have a wav file called example.wav whose sample rate is 16000 Hz
 data, _ = librosa.load('example.wav', 16000)
@@ -22,7 +22,7 @@ data = (data * 32768).astype(np.int16)
 raw_mfcc = compute_mfcc_feats(data, sample_frequency=16000, frame_length=25, frame_shift=10, low_freq=20, high_freq=-400, num_mel_bins=30, num_ceps=30, snip_edges=False)
 log_energy = raw_mfcc[:, 0]
 vad = compute_vad(log_energy, energy_threshold=5.5, energy_mean_scale=0.5, frames_context=2, proportion_threshold=0.12)
-mfcc = apply_sliding_cmvn(raw_mfcc, window=300, center=True)[vad]
+mfcc = apply_cmvn_sliding(raw_mfcc, window=300, center=True)[vad]
 ```
 
 ### Supported Functions
@@ -75,9 +75,9 @@ mfcc = apply_sliding_cmvn(raw_mfcc, window=300, center=True)[vad]
     window_type: Type of window ("hamming"|"hanning"|"povey"|"rectangular"|"sine"|"blackmann") (string, default = "povey")
     dtype: Type of array (np.float32|np.float64) (dtype or string, default=np.float32)
     ```
-- `kaldifeat.feature.apply_sliding_cmvn`
+- `kaldifeat.feature.apply_cmvn_sliding`
   - Apply sliding-window cepstral mean (and optionally variance) normalization
-  - `kaldi/src/featbin/apply_sliding_cmvn`
+  - `kaldi/src/featbin/apply_cmvn_sliding`
   - ```
     center: If true, use a window centered on the current frame (to the extent possible, modulo end effects). If false, window is to the left. (bool, default = false)
     window: Window in frames for running average CMN computation (int, default = 600)
