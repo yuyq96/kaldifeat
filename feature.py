@@ -207,7 +207,7 @@ def mel_scale(freq):
     return 1127.0 * np.log(1.0 + freq / 700.0)
 
 
-def get_mel_banks(num_bins, sample_frequency, low_freq, high_freq, n):
+def compute_mel_banks(num_bins, sample_frequency, low_freq, high_freq, n):
     """ Compute Mel banks.
 
     :param num_bins: Number of triangular mel-frequency bins
@@ -287,7 +287,7 @@ def compute_fbank_feats(
         use_power=True,
         window_type='povey',
         dtype=np.float32):
-    """ (Log) Mel Filter Banks
+    """ Compute (log) Mel filter bank energies
 
     :param waveform: Input waveform.
     :param blackman_coeff: Constant coefficient for generalized Blackman window. (float, default = 0.42)
@@ -309,7 +309,7 @@ def compute_fbank_feats(
     :param use_power: If true, use power, else use magnitude. (bool, default = true)
     :param window_type: Type of window ("hamming"|"hanning"|"povey"|"rectangular"|"sine"|"blackmann") (string, default = "povey")
     :param dtype: Type of array (np.float32|np.float64) (dtype or string, default=np.float32)
-    :return: (Log) Mel filter banks.
+    :return: (Log) Mel filter bank energies.
     """
     window_size = int(frame_length * sample_frequency * 0.001)
     window_shift = int(frame_shift * sample_frequency * 0.001)
@@ -336,7 +336,7 @@ def compute_fbank_feats(
         spectrum = compute_power_spectrum(frames, n)
     else:
         spectrum = compute_spectrum(frames, n)
-    mel_banks = get_mel_banks(
+    mel_banks = compute_mel_banks(
         num_bins=num_mel_bins,
         sample_frequency=sample_frequency,
         low_freq=low_freq,
@@ -378,7 +378,7 @@ def compute_mfcc_feats(
         use_energy=True,
         window_type='povey',
         dtype=np.float32):
-    """ Mel-Frequency Cepstral Coefficients
+    """ Compute mel-frequency cepstral coefficients
 
     :param waveform: Input waveform.
     :param blackman_coeff: Constant coefficient for generalized Blackman window. (float, default = 0.42)
@@ -437,7 +437,7 @@ def compute_mfcc_feats(
 # ---------- apply-cmvn-sliding ----------
 
 def apply_cmvn_sliding(feat, center=False, window=600, min_window=100, norm_vars=False):
-    """ Sliding-window cepstral mean (and optionally variance) normalization
+    """ Apply sliding-window cepstral mean (and optionally variance) normalization
 
     :param feat: Cepstrum.
     :param center: If true, use a window centered on the current frame (to the extent possible, modulo end effects). If false, window is to the left. (bool, default = false)

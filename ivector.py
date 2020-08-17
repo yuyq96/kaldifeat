@@ -6,14 +6,14 @@ from .feature import sliding_window
 # ---------- compute-vad ----------
 
 def compute_vad(log_energy, energy_mean_scale=0.5, energy_threshold=0.5, frames_context=0, proportion_threshold=0.6):
-    """ Voice activity detection
+    """ Apply voice activity detection
 
     :param log_energy: Log mel energy.
     :param energy_mean_scale: If this is set to s, to get the actual threshold we let m be the mean log-energy of the file, and use s*m + vad-energy-threshold (float, default = 0.5)
     :param energy_threshold: Constant term in energy threshold for VAD (also see energy_mean_scale) (float, default = 5)
     :param frames_context: Number of frames of context on each side of central frame, in window for which energy is monitored (int, default = 0)
     :param proportion_threshold: Parameter controlling the proportion of frames within the window that need to have more energy than the threshold (float, default = 0.6)
-    :return: vad: A vector of boolean that are True if we judge the frame voiced and False otherwise.
+    :return: A vector of boolean that are True if we judge the frame voiced and False otherwise.
     """
     assert len(log_energy.shape) == 1
     assert energy_mean_scale >= 0
