@@ -49,6 +49,7 @@ mfcc = apply_sliding_cmvn(raw_mfcc, window=300, center=True)[vad]
     use_log_fbank: If true, produce log-filterbank, else produce linear. (bool, default = true)
     use_power: If true, use power, else use magnitude. (bool, default = true)
     window_type: Type of window ("hamming"|"hanning"|"povey"|"rectangular"|"sine"|"blackmann") (string, default = "povey")
+    dtype: Type of array (np.float32|np.float64) (dtype or string, default=np.float32)
     ```
 - `kaldifeat.feature.compute_mfcc_feats`
   - Compute Mel-frequency cepstral coefficients (MFCCs)
@@ -72,6 +73,7 @@ mfcc = apply_sliding_cmvn(raw_mfcc, window=300, center=True)[vad]
     snip_edges: If true, end effects will be handled by outputting only frames that completely fit in the file, and the number of frames depends on the frame-length.  If false, the number of frames depends only on the frame-shift, and we reflect the data at the ends. (bool, default = true)
     use_energy: Use energy (not C0) in MFCC computation (bool, default = true)
     window_type: Type of window ("hamming"|"hanning"|"povey"|"rectangular"|"sine"|"blackmann") (string, default = "povey")
+    dtype: Type of array (np.float32|np.float64) (dtype or string, default=np.float32)
     ```
 - `kaldifeat.feature.apply_sliding_cmvn`
   - Apply sliding-window cepstral mean (and optionally variance) normalization
@@ -82,7 +84,6 @@ mfcc = apply_sliding_cmvn(raw_mfcc, window=300, center=True)[vad]
     min_window: Minimum CMN window used at start of decoding (adds latency only at start). Only applicable if center == false, ignored if center==true (int, default = 100)
     norm_vars: If true, normalize variance to one. (bool, default = false)
     ```
-  - `norm_vars` is not functional yet
 - `kaldifeat.ivector.compute_vad`
   - Energy-based voice activity detection
   - `kaldi/src/ivectorbin/compute_vad`
